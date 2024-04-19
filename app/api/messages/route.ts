@@ -104,7 +104,7 @@ export async function POST(
           }
         }
       });
-  
+      await decryptMessages(masterKey, [newMessage]);
       await pusherServer.trigger(conversationId, 'messages:new', newMessage);
   
       const lastMessage = updatedConversation.messages[updatedConversation.messages.length - 1];
@@ -126,4 +126,44 @@ export async function POST(
     console.log(error, 'ERROR_MESSAGES')
     return new NextResponse('Error', { status: 500 });
   }
+}
+
+async function decryptMessages(masterKey: string, messages: any[]) {
+  const decryptionPromises = messages.map(async (message) => {
+    if (message.body !== null) {
+      try {
+        const decryptedMessage = await decryptMessage(masterKey, message.body);
+        message.body = decryptedMessage;
+      } catch (error) {
+        console.error(`Error decrypting message: ${error}`);
+      }
+    }
+  });
+
+  await Promise.all(decryptionPromises);
+}
+
+async function decryptMessage(masterKey: string, encryptedMessage: string): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    const pythonProcess = spawn('python', ['./app/libs/AES.py', masterKey, encryptedMessage, 'decrypt']);
+    let decryptedMessage = '';
+  
+    pythonProcess.stdout.on('data', (data) => {
+      decryptedMessage += data.toString(); // Append data to decrypted message
+    });
+  
+    pythonProcess.stderr.on('data', (data) => {
+      console.error(`Python stderr: ${data}`);
+      reject(data.toString());
+    });
+  
+    pythonProcess.on('close', (code) => {
+      if (code === 0) {
+        // Successfully decrypted the message
+        resolve(decryptedMessage);
+      } else {
+        reject(`Failed to decrypt message. Exit code: ${code}`);
+      }
+    });
+  });
 }
