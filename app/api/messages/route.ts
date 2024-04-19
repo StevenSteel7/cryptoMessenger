@@ -46,7 +46,7 @@ export async function POST(
     // Convert the truncated hash to hexadecimal string
     let masterKey = truncatedHash.toString('hex');
     const encryptedMessagePromise = new Promise<string>((resolve, reject) => {
-      const pythonProcess = spawn('python', ['./app/libs/AES.py', masterKey, message, 'encrypt']);
+      const pythonProcess = spawn('python', ['./app/api/AES.py', masterKey, message, 'encrypt']);
       pythonProcess.stdout.on('data', (data) => {
         resolve(data.toString());
       });
@@ -145,7 +145,7 @@ async function decryptMessages(masterKey: string, messages: any[]) {
 
 async function decryptMessage(masterKey: string, encryptedMessage: string): Promise<string> {
   return new Promise<string>((resolve, reject) => {
-    const pythonProcess = spawn('python', ['./app/libs/AES.py', masterKey, encryptedMessage, 'decrypt']);
+    const pythonProcess = spawn('python', ['./app/api/AES.py', masterKey, encryptedMessage, 'decrypt']);
     let decryptedMessage = '';
   
     pythonProcess.stdout.on('data', (data) => {
