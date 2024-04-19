@@ -56,7 +56,7 @@ const AuthForm = () => {
       // Axios Register
 
 
-   /*    axios.post('/api/register', data)
+       axios.post('/api/register', data)
       .then(() => signIn('credentials', {
         ...data,
         redirect: false,
@@ -71,13 +71,13 @@ const AuthForm = () => {
         }
       })
       .catch(() => toast.error('Something went wrong!'))
-      .finally(() => setIsLoading(false)) */
+      .finally(() => setIsLoading(false)) 
     }
 
     if (variant === 'LOGIN') {
       // NextAuth Login
 
-     /*  signIn('credentials', {
+       signIn('credentials', {
         ...data,
         redirect: false
       })
@@ -90,14 +90,14 @@ const AuthForm = () => {
           router.push('/conversations')
         }
       })
-      .finally(() => setIsLoading(false)) */
+      .finally(() => setIsLoading(false)) 
     
     }
   }
 
   const socialAction = (action: string) => {
 
-  /*   setIsLoading(true);
+     setIsLoading(true);
 
     signIn(action, { redirect: false })
       .then((callback) => {
@@ -109,7 +109,7 @@ const AuthForm = () => {
           router.push('/conversations')
         }
       })
-      .finally(() => setIsLoading(false)); */
+      .finally(() => setIsLoading(false));
   } 
 
   return ( 
@@ -155,7 +155,7 @@ const AuthForm = () => {
             </Button>
           </div>
         </form>
-{/* 
+
         <div className="mt-6">
           <div className="relative">
             <div 
@@ -185,7 +185,7 @@ const AuthForm = () => {
               onClick={() => socialAction('google')} 
             />
           </div>
-        </div> */}
+        </div>
         <div 
           className="
             flex 
