@@ -1,4 +1,4 @@
-# Real-Time Messenger Clone: Next.js 13, React, Tailwind, Prisma, MongoDB, NextAuth, Pusher
+# ryptoMessenger: Next.js 13, React, Tailwind, Prisma, MongoDB, NextAuth, Pusher
 
 
 This is a repository for a End to End encrypted Messenger app: Next.js 13, React, Tailwind, Prisma, MongoDB, NextAuth, Pusher.
