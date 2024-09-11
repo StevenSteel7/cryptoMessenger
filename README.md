@@ -1,4 +1,4 @@
-# ryptoMessenger: Next.js 13, React, Tailwind, Prisma, MongoDB, NextAuth, Pusher
+# CryptoMessenger: Next.js 13, React, Tailwind, Prisma, MongoDB, NextAuth, Pusher
 
 
 This is a repository for a End to End encrypted Messenger app: Next.js 13, React, Tailwind, Prisma, MongoDB, NextAuth, Pusher.
